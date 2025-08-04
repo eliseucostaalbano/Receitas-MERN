@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 const userSchema = new mongoose.Schema(
   {
@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.pre('save', async function(next) {
-  if (this.isModified('senha')) return next();
+  if (!this.isModified('senha')) return next();
     const salt = await bcrypt.genSalt(10);
     this.senha = await bcrypt.hash(this.senha, salt);
     next();
