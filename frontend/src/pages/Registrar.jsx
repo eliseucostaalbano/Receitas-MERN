@@ -1,13 +1,28 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import { AuthContext } from '../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 
 const Registrar = () => {
-  const [user, setUser] = useState()
-  const [email, setEmail] = useState()
-  const [senha, setSenha] = useState()
+  const [user, setUser] = useState("")
+  const [email, setEmail] = useState("")
+  const [senha, setSenha] = useState("")
+
+  const { registro } = useContext(AuthContext)
+  const navegar = useNavigate()
+
+  const lidarSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      await registro( user, email, senha )
+      navegar('/')
+    } catch (error) {
+      console.error("Erro ao registrar:", error)
+    }
+  }
   return (
     <div className="max-w-md mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Registrar</h1>
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={lidarSubmit}>
        <div>
           <label className="block text-gray-700">Usuário</label>
           <input 

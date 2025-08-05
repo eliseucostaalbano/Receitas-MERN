@@ -1,12 +1,28 @@
-import React, { useState } from 'react'
+import { useContext, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/AuthContext'
 
 const Login = () => {
-  const [email, setEmail] = useState()
-  const [senha, setSenha] = useState()
+  const [email, setEmail] = useState("")
+  const [senha, setSenha] = useState("")
+
+ const { login } = useContext(AuthContext)
+  const navegar = useNavigate()
+
+  const lidarSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      await login( email, senha )
+      navegar('/')
+    } catch (error) {
+      console.error("Erro ao fazer login:", error)
+    }
+  }
+
   return (
     <div className="max-w-md mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Login</h1>
-      <form className="space-y-4">
+      <form className="space-y-4" onSubmit={lidarSubmit}>
        <div>
           <label className="block text-gray-700">Email</label>
           <input 
