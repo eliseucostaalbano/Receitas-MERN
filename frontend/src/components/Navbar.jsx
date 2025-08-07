@@ -22,7 +22,9 @@ const Navbar = () => {
         <div className="flex gap-x-4">
           {user ? (
             <div className="flex gap-x-4">
-              adicionar Receitas
+              <Link to="/nova-receita">
+                <button className="text-gray-600 hover:text-gray-800">Nova Receita</button>
+              </Link>
               <button onClick={lidarLogout}  className="text-gray-600 hover:text-gray-800">Logout</button>
             </div>
           ) : (
