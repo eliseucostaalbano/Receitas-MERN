@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
 
 const AddReceita = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +15,7 @@ const AddReceita = () => {
 
    const [error, setError] = useState("");
    const [carregar, setCarregar] = useState(false);
+  const navegar = useNavigate();
 
      const lidarInputMudança = (field, value) => {
        setFormData((prev) => ({ ...prev, [field]: value }));
@@ -55,6 +59,25 @@ const AddReceita = () => {
     e.preventDefault();
     setError("");
     setCarregar(true);
+    
+   try {
+     await axios.post("/api/receitas", {
+       nome: formData.nome,
+       ingredientes: formData.ingredientes.filter((i) => i.trim() !== ""),
+       instrucoes: formData.instrucoes,
+       categoria: formData.categoria,
+       fotoURL: formData.fotoURL,
+       tempoPreparo: formData.tempoPreparo ? Number(formData.tempoPreparo) : undefined,
+     });
+
+     navegar("/");
+   } catch (error) {
+     setError("Erro ao criar receita");
+     console.log(error);
+   } finally {
+     setCarregar(false);
+   }
+
    }
 
   return (
@@ -62,7 +85,7 @@ const AddReceita = () => {
       <h1 className='text-2xl font-bold'>Nova Receita</h1>
       <form onSubmit={lidarSubmit} className="space-y-4">
         <div>
-          <label className="block text-gray-700">Título</label>
+          <label className="block text-gray-700">Nome</label>
           <input
             type="text"
             value={formData.nome}
@@ -101,7 +124,7 @@ const AddReceita = () => {
           type="button" 
           className="text-blue-500 hover:underline"
           onClick={addIngrediente}>
-            Criar Receita
+            Adicionar Ingrediente
           </button>
         </div>
         
