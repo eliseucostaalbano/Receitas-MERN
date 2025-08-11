@@ -147,11 +147,11 @@ const AddReceita = () => {
             required
           >
             <option value="" disabled >Selecione uma Categoria</option>
-            <option value="café da manhã">Café da Manhã</option>
-            <option value="almoço">Almoço</option>
-            <option value="jantar">Jantar</option>
-            <option value="sobremesa">Sobremesa</option>
-            <option value="lanche">Lanche</option>
+            <option value="Café da manhã">Café da Manhã</option>
+            <option value="Almoço">Almoço</option>
+            <option value="Jantar">Jantar</option>
+            <option value="Sobremesa">Sobremesa</option>
+            <option value="Lanche">Lanche</option>
           </select>
         </div>
 

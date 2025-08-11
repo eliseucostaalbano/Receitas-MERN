@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Registrar from './pages/Registrar';
 import AddReceita from './pages/AddReceita';
+import ReceitaDetalhe from './pages/ReceitaDetalhe';
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/receitas/:id" element={<ReceitaDetalhe />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registrar />} />
           <Route path="/nova-receita" element={<AddReceita />} />
