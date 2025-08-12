@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Registrar from './pages/Registrar';
 import AddReceita from './pages/AddReceita';
+import EditReceita from './pages/EditReceitas';
 import ReceitaDetalhe from './pages/ReceitaDetalhe';
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/registro" element={<Registrar />} />
           <Route path="/nova-receita" element={<AddReceita />} />
+          <Route path="/editar-receita/:id" element={<EditReceita />} />
         </Routes>
       </AuthProvider>
   )
